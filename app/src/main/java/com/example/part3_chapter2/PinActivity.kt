@@ -2,13 +2,12 @@ package com.example.part3_chapter2
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.part3_chapter2.databinding.ActivityPinBinding
 import com.example.part3_chapter2.widget.ShuffleNumberKeyboard
 
-
-class PinActivity : AppCompatActivity(), ShuffleNumberKeyboard.KeyPadListener{
+class PinActivity : AppCompatActivity(), ShuffleNumberKeyboard.KeyPadListener {
 
     private lateinit var binding: ActivityPinBinding
     private val viewModel: PinViewModel by viewModels()
@@ -20,10 +19,10 @@ class PinActivity : AppCompatActivity(), ShuffleNumberKeyboard.KeyPadListener{
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.shuffleKeyBoard.setKeyPadListener(this)
+        binding.shuffleKeyboard.setKeyPadListener(this)
 
         viewModel.messageLiveData.observe(this) {
-            println(Toast.makeText(this, "", Toast.LENGTH_SHORT))
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -39,5 +38,4 @@ class PinActivity : AppCompatActivity(), ShuffleNumberKeyboard.KeyPadListener{
     override fun onClickDone() {
         viewModel.done()
     }
-
 }

@@ -12,7 +12,6 @@ import com.example.part3_chapter2.util.ViewUtil.setOnEditorActionListener
 import com.example.part3_chapter2.util.ViewUtil.showKeyboard
 import com.example.part3_chapter2.util.ViewUtil.showKeyboardDelay
 
-//복습
 class IdentityInputActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIdentityInputBinding
 

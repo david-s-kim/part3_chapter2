@@ -8,10 +8,9 @@ import java.util.regex.Pattern
 class PinViewModel : ViewModel() {
 
     val passwordLiveData: LiveData<CharSequence> by lazy { _passwordLiveData }
-
     private val _passwordLiveData by lazy { MutableLiveData<CharSequence>() }
 
-    val messageLiveData = LiveData<String> by lazy {  }
+    val messageLiveData: LiveData<String> by lazy { _messageLiveData }
     private val _messageLiveData by lazy { MutableLiveData<String>() }
 
     private val password: StringBuffer = StringBuffer("")
@@ -31,13 +30,10 @@ class PinViewModel : ViewModel() {
     }
 
     fun done() {
-        if (validPin()){
+        if (validPin()) {
             _messageLiveData.value = "설정한 비밀번호는 $password 입니다."
             reset()
         }
-        password.replace(0, password.length, "")
-        _passwordLiveData.value = password.toString()
-
     }
 
     private fun reset() {
@@ -46,7 +42,7 @@ class PinViewModel : ViewModel() {
     }
 
     private fun validPin(): Boolean {
-        if(password.length < 6) {
+        if (password.length < 6) {
             _messageLiveData.value = "비밀번호 6자리를 입력해주세요."
             return false
         }
@@ -59,18 +55,19 @@ class PinViewModel : ViewModel() {
 
         var count = 0
         password.reduce { before, after ->
-            count++
-            if (count >= 2) {
-                _messageLiveData.value = "연속 된 3자리 숫자는 사용하실 수 없습니다."
-                reset()
-                return false
+            if (after - before == 1) {
+                count++
+                if (count >= 2) {
+                    _messageLiveData.value = "연속 된 3자리 숫자는 사용하실 수 없습니다."
+                    reset()
+                    return false
+                }
             } else {
                 count = 0
             }
             after
         }
-
         return true
-
     }
+
 }
