@@ -32,7 +32,7 @@ class PinViewModel : ViewModel() {
 
     fun done() {
         if (validPin()){
-            _messageLiveData.vale = "설정한 비밀번호는 $password 입니다."
+            _messageLiveData.value = "설정한 비밀번호는 $password 입니다."
             reset()
         }
         password.replace(0, password.length, "")
